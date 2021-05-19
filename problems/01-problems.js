@@ -19,10 +19,19 @@ lucasNumberMemo(41)  // => 370248451
 lucasNumberMemo(42)  // => 599074578
 *********************************************************************/
 
-function lucasNumberMemo(n, memo = {}) {
-  // your code here
+function lucasNumberMemo(n, memo = { 0: 2, 1: 1}) {
+
+  if (n in memo) return memo[n];
+
+  memo[n] = lucasNumberMemo(n - 1, memo) + lucasNumberMemo(n - 2, memo);
+  return memo[n];
 }
 
+// console.log(lucasNumberMemo(0));   // => 2
+// console.log(lucasNumberMemo(1));   // => 1
+// console.log(lucasNumberMemo(40));  // => 228826127
+// console.log(lucasNumberMemo(41));  // => 370248451
+// console.log(lucasNumberMemo(42));  // => 599074578
 /*********************************************************************
 Write a function, stepper(nums), that takes in an array of non negative
 numbers.
@@ -36,7 +45,7 @@ from the first position of the array to the last position.
 For Example:
 
 Given [3, 1, 0, 5, 10]
-  - We begin at first position, 3. 
+  - We begin at first position, 3.
   - Since the element is 3 we can take up to 3 steps from this position.
   - This means we can step to the 1, 0, or 5
   - Say we step to 1
